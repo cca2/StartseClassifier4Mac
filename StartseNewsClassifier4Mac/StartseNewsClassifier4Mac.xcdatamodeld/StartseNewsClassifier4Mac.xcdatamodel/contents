@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="true" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15400" systemVersion="19A602" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="ClassifiedNewsData" representedClassName="ClassifiedNewsData" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="isClassified" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="link" optional="YES" attributeType="String"/>
+        <attribute name="recordName" optional="YES" attributeType="String"/>
+        <attribute name="subtititle" optional="YES" attributeType="String"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="sentences" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SentenceData" inverseName="ofNews" inverseEntity="SentenceData"/>
+    </entity>
+    <entity name="SentenceData" representedClassName="SentenceData" syncable="YES" codeGenerationType="class">
+        <attribute name="containsInvestment" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="containsProblem" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="containsSegment" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="containsSolution" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="containsTechnology" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <relationship name="ofNews" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ClassifiedNewsData" inverseName="sentences" inverseEntity="ClassifiedNewsData"/>
+    </entity>
+    <elements>
+        <element name="SentenceData" positionX="-63" positionY="-18" width="128" height="163"/>
+        <element name="ClassifiedNewsData" positionX="-54" positionY="45" width="128" height="163"/>
+    </elements>
 </model>
