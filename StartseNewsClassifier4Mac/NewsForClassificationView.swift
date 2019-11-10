@@ -10,7 +10,8 @@ import SwiftUI
 
 struct NewsForClassificationView: View {
     @State var title:String = "Conheça a Mission Barns, startup que está criando carne em laboratório"
-    @State var subtitle:String = "Startup foi criada em 2018, na universidade de Berkeley (EUA) e cultivo de origem animal para a produção de carne"
+    @State var subtitle:String = "Startup foi criada em 2018, na universidade de Berkeley (EUA) e cultivo de origem animal para a produção de carne"    
+    @State var text:String = "Texto da notícia a ser classificada"
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
@@ -38,7 +39,7 @@ struct NewsForClassificationView: View {
                             Text(self.subtitle).font(.subheadline)
                         }.frame(width: 400)
                         VStack {
-                            Text("Texto da notícia a ser classificada")
+                            Text(self.text)
                         }
                         Spacer()
                     }.padding([.top, .trailing])
@@ -50,7 +51,7 @@ struct NewsForClassificationView: View {
                         Spacer()
                     }.padding()
                 }
-            }.background(Color.red)
+            }
         }
     }
 }
