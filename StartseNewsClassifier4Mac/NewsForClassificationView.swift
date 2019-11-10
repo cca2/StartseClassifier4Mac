@@ -9,19 +9,11 @@
 import SwiftUI
 
 struct NewsCellView: View {
-    @State var title:String
-    @State var subtitle:String
-    
+    @State var news:NewsViewModel
+    @Binding var selectedNews:NewsViewModel?
+
     var body: some View {
-        VStack (alignment: .leading) {
-            VStack {
-                Text(title).font(.system(size: 12)).bold()
-                Text(subtitle).font(.system(size:10))
-            }.padding()
-        }.frame(width: 280)
-            .onTapGesture {
-                print("dei um toque")
-        }
+        SelectedNewsCellView(news: news, selectedNews: $selectedNews)
     }
 }
 
@@ -47,11 +39,46 @@ struct NewsBeingShown: View {
 
 struct SelectedNewsCellView: View {
     @State var news:NewsViewModel
-    
+
     @Binding var selectedNews:NewsViewModel?
     
     @State var backgroundColor = Color.white
     @State var foregroundColor = Color.black
+    
+    var body: some View {
+        if news == selectedNews {
+            return VStack (alignment: .leading) {
+                VStack {
+                    Text(news.title).font(.system(size: 12)).bold()
+                    Text(news.subtitle).font(.system(size:10))
+                }.padding()
+            }.frame(width: 280).background(Color.white).foregroundColor(Color.black)
+                .onTapGesture {
+                    self.selectedNews = self.news
+            }
+        }else {
+            return
+            VStack (alignment: .leading) {
+                VStack {
+                    Text(news.title).font(.system(size: 12)).bold()
+                    Text(news.subtitle).font(.system(size:10))
+                }.padding()
+            }.frame(width: 280).background(Color.black).foregroundColor(Color.white)
+                .onTapGesture {
+                    self.selectedNews = self.news
+            }
+
+        }
+    }
+}
+
+struct NonSelectedNewsCellView: View {
+    @State var news:NewsViewModel
+
+    @Binding var selectedNews:NewsViewModel?
+    
+    @State var backgroundColor = Color.black
+    @State var foregroundColor = Color.white
     
     var body: some View {
         VStack (alignment: .leading) {
@@ -62,14 +89,6 @@ struct SelectedNewsCellView: View {
         }.frame(width: 280).background(backgroundColor).foregroundColor(foregroundColor)
             .onTapGesture {
                 self.selectedNews = self.news
-        }.onAppear() {
-            if self.selectedNews == self.news {
-                self.backgroundColor = .white
-                self.foregroundColor = .black
-            }else {
-                self.backgroundColor = .black
-                self.foregroundColor = .white
-            }
         }
     }
 }
@@ -92,7 +111,7 @@ struct NewsForClassificationView: View {
                 Divider()
                 List {
                     ForEach(newsList) {news in
-                        SelectedNewsCellView(news: news, selectedNews: self.$selectedNews)
+                        NewsCellView(news: news, selectedNews: self.$selectedNews)
                         Divider()
                     }
                 }.onAppear() {
