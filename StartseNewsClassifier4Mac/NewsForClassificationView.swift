@@ -32,9 +32,15 @@ struct NewsBeingShown: View {
                 Divider()
                 ScrollView {
                     Text(news!.text).font(.system(size: 16))
+                    .lineSpacing(10)
                 }
             }else {
-                Text("Não há notícias para classificar")
+                HStack {
+                    VStack (alignment: .center) {
+                        Text("Não há notícias para classificar").font(.system(size: 24))
+                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                    }
+                }
             }
             Spacer()
         }.padding([.top, .trailing])
@@ -110,7 +116,7 @@ struct NewsForClassificationView: View {
         HStack {
             VStack(alignment: .leading) {
                 HStack {
-                    Text("\(newsList.count)").font(.system(size: 30)).bold()
+                    Text("\(newsList.count)").font(.system(size: 20)).bold()
                     Text("Notícias faltando").font(.system(size: 18))
                 }.padding()
                 Divider()
@@ -130,13 +136,11 @@ struct NewsForClassificationView: View {
                     if (!self.isSavingForClassification) {
                         NewsBeingShown(news: $selectedNews)
                     }else {
-//                        HStack {
-                            VStack (alignment: .center) {
-                                Text("Salvando notícia para classificação").font(.system(size: 24))
-                                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
-                            }
-                            .background(Color.red)
-//                        }
+                        VStack (alignment: .center) {
+                            Text("Salvando notícia para classificação").font(.system(size: 24))
+                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+                        }
+                        .background(Color.red)
                     }
                     Spacer()
                     Divider()
