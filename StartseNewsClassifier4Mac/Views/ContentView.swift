@@ -15,13 +15,7 @@ struct ContentView: View {
     @State var texts:[String] = ["Cristiano", "Coelho", "Araújo"]
     
     var body: some View {
-//        Text("Hello World")
-//            .frame(maxWidth: .infinity, maxHeight: .infinity)
-        ConsolidationView(consolidationViewModel: ConsolidationViewModel(context: context))
-//        List(texts, id: \.self) {
-//            text in
-//            Text(text)
-//        }
+        NewsForClassificationView()
     }
 }
 
