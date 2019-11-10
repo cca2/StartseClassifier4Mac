@@ -23,11 +23,15 @@ struct NewsBeingShown: View {
     var body: some View {
         return VStack (alignment: .leading) {
             if news != nil {
-                VStack { Text(news!.title).font(.title)
-                    Text(news!.subtitle).font(.subheadline)
-                }.frame(width: 400)
                 VStack {
-                    Text(news!.text)
+                    VStack {
+                        Text(news!.title).font(.system(size: 30)).bold()
+                        Text(news!.subtitle).font(.system(size: 20))
+                    }
+                }.frame(width: 400)
+                Divider()
+                ScrollView {
+                    Text(news!.text).font(.system(size: 16))
                 }
             }else {
                 Text("Não há notícias para classificar")
@@ -57,8 +61,7 @@ struct SelectedNewsCellView: View {
                     self.selectedNews = self.news
             }
         }else {
-            return
-            VStack (alignment: .leading) {
+            return VStack (alignment: .leading) {
                 VStack {
                     Text(news.title).font(.system(size: 12)).bold()
                     Text(news.subtitle).font(.system(size:10))
