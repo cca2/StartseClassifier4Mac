@@ -46,18 +46,21 @@ struct NewsBeingShown: View {
 }
 
 struct SelectedNewsCellView: View {
-    @State var title:String
-    @State var subtitle:String
+//    @State var title:String
+//    @State var subtitle:String
+    @State var news:NewsViewModel
+    
+    @Binding var selectedNews:NewsViewModel?
     
     var body: some View {
         VStack (alignment: .leading) {
             VStack {
-                Text(title).font(.system(size: 12)).bold()
-                Text(subtitle).font(.system(size:10))
+                Text(news.title).font(.system(size: 12)).bold()
+                Text(news.subtitle).font(.system(size:10))
             }.padding()
         }.frame(width: 280).background(Color.white).foregroundColor(.black)
             .onTapGesture {
-                print("dei um toque")
+                self.selectedNews = self.news
         }
     }
 }
@@ -80,7 +83,7 @@ struct NewsForClassificationView: View {
                 Divider()
                 List {
                     ForEach(newsList) {news in
-                        SelectedNewsCellView(title: news.title, subtitle: news.subtitle)
+                        SelectedNewsCellView(news: news, selectedNews: self.$selectedNews)
                         Divider()
                     }
                 }.onAppear() {
@@ -92,15 +95,6 @@ struct NewsForClassificationView: View {
             VStack {
                 HStack {
                     NewsBeingShown(news: $selectedNews)
-//                    VStack (alignment: .leading) {
-//                        VStack { Text(self.newsList[self.selectedNewsIndex].title).font(.title)
-//                        Text(self.newsList[self.selectedNewsIndex].subtitle).font(.subheadline)
-//                        }.frame(width: 400)
-//                        VStack {
-//                            Text(self.newsList[self.selectedNewsIndex].text)
-//                        }
-//                        Spacer()
-//                    }.padding([.top, .trailing])
                     Spacer()
                     Divider()
                     VStack {
