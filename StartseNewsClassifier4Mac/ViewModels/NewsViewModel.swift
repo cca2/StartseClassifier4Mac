@@ -33,6 +33,8 @@ class NewsViewModel: Identifiable {
         }
     }
     
+    var isSelected:Bool = false
+    
     var recordName: String?
     
     var isClassified: Bool = false

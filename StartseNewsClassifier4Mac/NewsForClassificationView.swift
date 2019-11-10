@@ -8,11 +8,67 @@
 
 import SwiftUI
 
+struct NewsCellView: View {
+    @State var title:String
+    @State var subtitle:String
+    
+    var body: some View {
+        VStack (alignment: .leading) {
+            VStack {
+                Text(title).font(.system(size: 12)).bold()
+                Text(subtitle).font(.system(size:10))
+            }.padding()
+        }.frame(width: 280)
+            .onTapGesture {
+                print("dei um toque")
+        }
+    }
+}
+
+struct NewsBeingShown: View {
+    @Binding var news:NewsViewModel?
+
+    var body: some View {
+        return VStack (alignment: .leading) {
+            if news != nil {
+                VStack { Text(news!.title).font(.title)
+                    Text(news!.subtitle).font(.subheadline)
+                }.frame(width: 400)
+                VStack {
+                    Text(news!.text)
+                }
+            }else {
+                Text("Não há notícias para classificar")
+            }
+            Spacer()
+        }.padding([.top, .trailing])
+    }
+}
+
+struct SelectedNewsCellView: View {
+    @State var title:String
+    @State var subtitle:String
+    
+    var body: some View {
+        VStack (alignment: .leading) {
+            VStack {
+                Text(title).font(.system(size: 12)).bold()
+                Text(subtitle).font(.system(size:10))
+            }.padding()
+        }.frame(width: 280).background(Color.white).foregroundColor(.black)
+            .onTapGesture {
+                print("dei um toque")
+        }
+    }
+}
+
 struct NewsForClassificationView: View {
     let newsForClassification = NewsForClassificationViewModel()
     
     @State var newsList:[NewsViewModel]
     @State var selectedNewsIndex = 0
+    
+    @State var selectedNews:NewsViewModel?
     
     var body: some View {
         HStack {
@@ -24,29 +80,27 @@ struct NewsForClassificationView: View {
                 Divider()
                 List {
                     ForEach(newsList) {news in
-                        VStack (alignment: .leading) {
-                            Text(news.title).font(.system(size: 16)).bold()
-                            Text(news.subtitle).font(.body)
-                        }.frame(width: 290)
+                        SelectedNewsCellView(title: news.title, subtitle: news.subtitle)
                         Divider()
                     }
                 }.onAppear() {
                     self.newsList = self.newsForClassification.newsList
+                    self.selectedNews = self.newsList.first
                 }
             }.frame(width: 300, alignment: .leading)
             Divider()
             VStack {
                 HStack {
-                    VStack (alignment: .leading) {
-                        VStack {
-                            Text(self.newsList[self.selectedNewsIndex].title).font(.title)
-                            Text(self.newsList[self.selectedNewsIndex].subtitle).font(.subheadline)
-                        }.frame(width: 400)
-                        VStack {
-                            Text(self.newsList[self.selectedNewsIndex].text)
-                        }
-                        Spacer()
-                    }.padding([.top, .trailing])
+                    NewsBeingShown(news: $selectedNews)
+//                    VStack (alignment: .leading) {
+//                        VStack { Text(self.newsList[self.selectedNewsIndex].title).font(.title)
+//                        Text(self.newsList[self.selectedNewsIndex].subtitle).font(.subheadline)
+//                        }.frame(width: 400)
+//                        VStack {
+//                            Text(self.newsList[self.selectedNewsIndex].text)
+//                        }
+//                        Spacer()
+//                    }.padding([.top, .trailing])
                     Spacer()
                     Divider()
                     VStack {

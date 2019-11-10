@@ -10,6 +10,7 @@ import Foundation
 
 class NewsForClassificationViewModel: ObservableObject {
     var newsList:[NewsViewModel] = []
+    @Published var selectedNews:NewsViewModel?
     
     init() {
         let fileManagement = FileManagement()
