@@ -94,6 +94,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DA8599C6237792A7009A10F9 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				DA9682E92375B15300A03A3C /* SentenceViewModel.swift */,
+				DAAEFF622376BBC7001A5F03 /* ConsolidationViewModel.swift */,
+				DAAEFF642376BBFF001A5F03 /* ConsolidationView.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		DA8599C7237792B5009A10F9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DA9682E32375B0CB00A03A3C /* NewsModel.swift */,
+				DA9682E52375B0D600A03A3C /* SentenceModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		DA9682A22375AF0300A03A3C = {
 			isa = PBXGroup;
 			children = (
@@ -124,11 +143,8 @@
 				DA9682BD2375AF0400A03A3C /* Info.plist */,
 				DA9682BE2375AF0400A03A3C /* StartseNewsClassifier4Mac.entitlements */,
 				DA9682B22375AF0300A03A3C /* StartseNewsClassifier4Mac.xcdatamodeld */,
-				DA9682E32375B0CB00A03A3C /* NewsModel.swift */,
-				DA9682E52375B0D600A03A3C /* SentenceModel.swift */,
-				DA9682E92375B15300A03A3C /* SentenceViewModel.swift */,
-				DAAEFF622376BBC7001A5F03 /* ConsolidationViewModel.swift */,
-				DAAEFF642376BBFF001A5F03 /* ConsolidationView.swift */,
+				DA8599C7237792B5009A10F9 /* Models */,
+				DA8599C6237792A7009A10F9 /* ViewModels */,
 				DAAEFF5F2376BA88001A5F03 /* Views */,
 				DA9682B72375AF0400A03A3C /* Preview Content */,
 			);
