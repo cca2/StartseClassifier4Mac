@@ -46,11 +46,12 @@ struct NewsBeingShown: View {
 }
 
 struct SelectedNewsCellView: View {
-//    @State var title:String
-//    @State var subtitle:String
     @State var news:NewsViewModel
     
     @Binding var selectedNews:NewsViewModel?
+    
+    @State var backgroundColor = Color.white
+    @State var foregroundColor = Color.black
     
     var body: some View {
         VStack (alignment: .leading) {
@@ -58,9 +59,17 @@ struct SelectedNewsCellView: View {
                 Text(news.title).font(.system(size: 12)).bold()
                 Text(news.subtitle).font(.system(size:10))
             }.padding()
-        }.frame(width: 280).background(Color.white).foregroundColor(.black)
+        }.frame(width: 280).background(backgroundColor).foregroundColor(foregroundColor)
             .onTapGesture {
                 self.selectedNews = self.news
+        }.onAppear() {
+            if self.selectedNews == self.news {
+                self.backgroundColor = .white
+                self.foregroundColor = .black
+            }else {
+                self.backgroundColor = .black
+                self.foregroundColor = .white
+            }
         }
     }
 }

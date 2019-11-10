@@ -13,7 +13,15 @@ import CloudKit
 
 import NaturalLanguage
 
-class NewsViewModel: Identifiable {
+class NewsViewModel: Identifiable, Equatable {
+    static func == (lhs: NewsViewModel, rhs: NewsViewModel) -> Bool {
+        if lhs.id.uuidString == rhs.id.uuidString {
+            return true
+        }else {
+            return false
+        }
+    }
+    
     let news:NewsModel
     
     init(newsModel:NewsModel) {
