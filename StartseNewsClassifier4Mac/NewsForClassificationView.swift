@@ -129,15 +129,23 @@ struct NewsForClassificationView: View {
                     Spacer()
                     Divider()
                     VStack {
-                        Button(action: {
-                            NSOpenPanel().runModal()
-                        }, label: {Text("Classificar").frame(width:80)})
+                        Button(action: saveForClassification
+                        , label: {Text("Classificar").frame(width:80)})
                         Button(action: {}, label: {Text("Apagar").frame(width: 80)})
                         Spacer()
                     }.padding()
                 }
             }
         }
+    }
+    
+    func saveForClassification() {
+        newsForClassification.saveForClassification(news: selectedNews!, completion: {
+            self.newsList.removeAll{
+                $0 == self.selectedNews
+            }
+            self.selectedNews = self.newsList.first
+        })
     }
 }
 

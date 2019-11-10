@@ -10,10 +10,10 @@ import Foundation
 
 class NewsForClassificationViewModel: ObservableObject {
     var newsList:[NewsViewModel] = []
+    let fileManagement = NewsFileManagement()
     @Published var selectedNews:NewsViewModel?
     
     init() {
-        let fileManagement = FileManagement()
         fileManagement.getNewsFromDocumentsDirectory()
         
         let newsModels = fileManagement.newsModels
@@ -21,6 +21,15 @@ class NewsForClassificationViewModel: ObservableObject {
             model in
             let newsViewModel = NewsViewModel(newsModel: model)
             self.newsList.append(newsViewModel)
+        }
+    }
+    
+    func saveForClassification(news: NewsViewModel, completion: @escaping () -> ()) {
+        fileManagement.uploadNewsForClassification(news: news.news) {
+            self.newsList.removeAll {
+                $0 == news
+            }
+            completion()
         }
     }
 }
