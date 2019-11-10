@@ -104,6 +104,8 @@ struct NewsForClassificationView: View {
     
     @State var selectedNews:NewsViewModel?
     
+    @State var isSavingForClassification:Bool = false
+    
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
@@ -125,7 +127,17 @@ struct NewsForClassificationView: View {
             Divider()
             VStack {
                 HStack {
-                    NewsBeingShown(news: $selectedNews)
+                    if (!self.isSavingForClassification) {
+                        NewsBeingShown(news: $selectedNews)
+                    }else {
+//                        HStack {
+                            VStack (alignment: .center) {
+                                Text("Salvando notícia para classificação").font(.system(size: 24))
+                                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+                            }
+                            .background(Color.red)
+//                        }
+                    }
                     Spacer()
                     Divider()
                     VStack {
@@ -140,11 +152,13 @@ struct NewsForClassificationView: View {
     }
     
     func saveForClassification() {
+        self.isSavingForClassification = true
         newsForClassification.saveForClassification(news: selectedNews!, completion: {
             self.newsList.removeAll{
                 $0 == self.selectedNews
             }
             self.selectedNews = self.newsList.first
+            self.isSavingForClassification = false
         })
     }
 }
