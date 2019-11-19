@@ -34,7 +34,7 @@ class TeamMemberViewModel:ObservableObject {
     }
     
     func fetchTeamMembers(forMembers members:String) {
-        let memberList = members.trimmingCharacters(in: .whitespacesAndNewlines).split(separator: " ")
+        let memberList = members.trimmingCharacters(in: .whitespacesAndNewlines).split(separator: Character(" "))
         let filteredMembers = memberList.filter({
             $0.first == "@"
         })

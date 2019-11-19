@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DA22514623832FA000F173E8 /* TeamRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA22514523832FA000F173E8 /* TeamRegistrationView.swift */; };
-		DA2251492384632E00F173E8 /* MemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2251482384632E00F173E8 /* MemberView.swift */; };
+		DA22514B23846D2100F173E8 /* StudentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA22514A23846D2100F173E8 /* StudentView.swift */; };
 		DA5D6AE52378358A00A7524B /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5D6AE42378358A00A7524B /* NewsViewModel.swift */; };
 		DA5D6AE72378D4EE00A7524B /* ConsolidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5D6AE62378D4EE00A7524B /* ConsolidationView.swift */; };
 		DA8599CB2377933E009A10F9 /* FileManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8599CA2377933E009A10F9 /* FileManagement.swift */; };
@@ -25,6 +25,7 @@
 		DA9682E62375B0D600A03A3C /* SentenceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9682E52375B0D600A03A3C /* SentenceModel.swift */; };
 		DA9682EA2375B15300A03A3C /* SentenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9682E92375B15300A03A3C /* SentenceViewModel.swift */; };
 		DA9682ED2375B66F00A03A3C /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9682E12375AF1D00A03A3C /* CloudKit.framework */; };
+		DA9ADF3F23848B9300EADD74 /* CommonInterstStudentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9ADF3E23848B9300EADD74 /* CommonInterstStudentsView.swift */; };
 		DAAEFF612376BAE8001A5F03 /* NewsForClassificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEFF602376BAE8001A5F03 /* NewsForClassificationView.swift */; };
 		DAAEFF632376BBC7001A5F03 /* ConsolidationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEFF622376BBC7001A5F03 /* ConsolidationViewModel.swift */; };
 		DAAEFF6723778322001A5F03 /* OpeningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEFF6623778322001A5F03 /* OpeningView.swift */; };
@@ -49,7 +50,7 @@
 
 /* Begin PBXFileReference section */
 		DA22514523832FA000F173E8 /* TeamRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRegistrationView.swift; sourceTree = "<group>"; };
-		DA2251482384632E00F173E8 /* MemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberView.swift; sourceTree = "<group>"; };
+		DA22514A23846D2100F173E8 /* StudentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentView.swift; sourceTree = "<group>"; };
 		DA5D6AE42378358A00A7524B /* NewsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewModel.swift; sourceTree = "<group>"; };
 		DA5D6AE62378D4EE00A7524B /* ConsolidationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsolidationView.swift; sourceTree = "<group>"; };
 		DA8599CA2377933E009A10F9 /* FileManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagement.swift; sourceTree = "<group>"; };
@@ -73,6 +74,7 @@
 		DA9682E32375B0CB00A03A3C /* NewsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		DA9682E52375B0D600A03A3C /* SentenceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentenceModel.swift; sourceTree = "<group>"; };
 		DA9682E92375B15300A03A3C /* SentenceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentenceViewModel.swift; sourceTree = "<group>"; };
+		DA9ADF3E23848B9300EADD74 /* CommonInterstStudentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonInterstStudentsView.swift; sourceTree = "<group>"; };
 		DAAEFF602376BAE8001A5F03 /* NewsForClassificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewsForClassificationView.swift; path = StartseNewsClassifier4Mac/NewsForClassificationView.swift; sourceTree = SOURCE_ROOT; };
 		DAAEFF622376BBC7001A5F03 /* ConsolidationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsolidationViewModel.swift; sourceTree = "<group>"; };
 		DAAEFF6623778322001A5F03 /* OpeningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OpeningView.swift; path = ../../../StartseNewsClassifier/StartseNewsClassifier/Views/OpeningView.swift; sourceTree = "<group>"; };
@@ -108,7 +110,8 @@
 			isa = PBXGroup;
 			children = (
 				DA22514523832FA000F173E8 /* TeamRegistrationView.swift */,
-				DA2251482384632E00F173E8 /* MemberView.swift */,
+				DA22514A23846D2100F173E8 /* StudentView.swift */,
+				DA9ADF3E23848B9300EADD74 /* CommonInterstStudentsView.swift */,
 			);
 			path = StudentApp;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA22514623832FA000F173E8 /* TeamRegistrationView.swift in Sources */,
+				DA9ADF3F23848B9300EADD74 /* CommonInterstStudentsView.swift in Sources */,
 				DA9682E42375B0CB00A03A3C /* NewsModel.swift in Sources */,
 				DAAEFF632376BBC7001A5F03 /* ConsolidationViewModel.swift in Sources */,
 				DA8599CB2377933E009A10F9 /* FileManagement.swift in Sources */,
@@ -362,8 +366,8 @@
 				DA9682AF2375AF0300A03A3C /* AppDelegate.swift in Sources */,
 				DA5D6AE52378358A00A7524B /* NewsViewModel.swift in Sources */,
 				DA9682B42375AF0300A03A3C /* StartseNewsClassifier4Mac.xcdatamodeld in Sources */,
+				DA22514B23846D2100F173E8 /* StudentView.swift in Sources */,
 				DA9682EA2375B15300A03A3C /* SentenceViewModel.swift in Sources */,
-				DA2251492384632E00F173E8 /* MemberView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
