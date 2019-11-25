@@ -9,6 +9,25 @@
 import SwiftUI
 
 struct CardsComposerView: View {
+    private let news2Compose:ComposingCardsViewModel?
+  
+    @State var title:String = "Título"
+    @State var subtitle:String = "Subtítulo"
+    @State var text:String = "texto"
+    
+    @State var sentences:[SentenceViewModel] = [SentenceViewModel(sentenceModel: SentenceModel(id: UUID(), text: "Esta é uma sentença muito legal", classifications: [.segment])), SentenceViewModel(sentenceModel: SentenceModel(id: UUID(), text: "Esta é uma sentença muito legal", classifications: [.segment]))]
+    
+    init() {
+        self.news2Compose = nil
+        
+        let sentence1 = SentenceViewModel(sentenceModel: SentenceModel(id: UUID(), text: "Esta é uma sentença muito legal", classifications: [.segment]))
+        self.sentences.append(sentence1)
+    }
+    
+    init(context:NSManagedObjectContext) {
+        self.news2Compose = ComposingCardsViewModel(context: context)
+    }
+    
     var body: some View {
         HStack {
             VStack {
@@ -18,12 +37,12 @@ struct CardsComposerView: View {
                 Divider()
                 Spacer()
                 VStack {
-                    Text("Tesla revela a Cybertruck, sua picape futurista e à prova de balas").font(.body).bold()
-                    Text("A picape elétrica com autonomia da Tesla terá o preço inicial de US$ 39.900 e começará a ser fabricada no fim de 2021").font(.body)
+                    Text(title).font(.body).bold()
+//                    Text(subtitle).font(.body)
                 }.padding()
                 Divider()
                 ScrollView {
-                    Text("A Tesla revelou, na noite desta quinta-feira (21), sua picape futurista aguardada (e planejada) por anos por Elon Musk. Chamado de “Cybertruck”, o veículo é feito de aço inoxidável ultrarresistente — a carroceria levou marteladas de Franz von Holzhausen, chefe de design da Tesla, no evento de lançamento. Musk, CEO da Tesla, afirmou que a carcaça é à prova de balas. \n O vidro também foi projetado para conter grandes impactos — no evento, Holzhausen jogou uma bola de metal para comprovar, mas o vidro acabou trincando. Elon Musk afirmou que o vidro seria aprimorado até o lançamento — a fabricação do veículo iniciará no fim de 2021. \n O veículo foi criado para unir resistência e rapidez. Com versões de um, dois ou três motores elétricos, o Cybertruck poderá ter tração traseira ou integral. A aceleração irá de 0 a 96 km/h em 2,9 segundos. Na versão completa, com três motores, a autonomia é de 800 km, com velocidade máxima de 209 km/h.")
+                    Text(text)
                 }.padding()
                 Spacer()
             }.frame(minWidth: 300, idealWidth: 300, maxWidth: 300, minHeight: 600, maxHeight: .infinity, alignment: .center)
@@ -33,7 +52,17 @@ struct CardsComposerView: View {
                 Divider()
                 HStack {
                     VStack{
-                        Text("Sentença").font(.title)
+                        Text("Sentenças").font(.title)
+                        List {
+                            ForEach(sentences) {
+                                sentence in
+                                VStack {
+                                    Text(sentence.text)
+                                        .frame(width:190)
+                                    Divider()
+                                }
+                            }
+                        }
                         Spacer()
                     }.frame(minWidth: 200, idealWidth: 100, maxWidth: 200, alignment: .center)
                     Divider()
@@ -46,37 +75,45 @@ struct CardsComposerView: View {
                     VStack (alignment: .center){
                         Text("Cartões").font(.title)
                         HStack {
-                            CardView()
-                            CardView()
+                            CardView(text: "Farmácias", imageName: "segmento-farmacia")
+                            CardView(text: "Clínicas", imageName: "segmento-clinica-medica")
                         }
                         HStack {
-                            CardView()
-                            CardView()
+                            CardView(text: "Distribuidor de medicamento", imageName: "segmento-distribuidora")
+                            CardView(text: "Fabricante de medicamentos", imageName: "segmento-fabricante")
                         }
                         HStack {
-                            CardView()
-                            CardView()
+                            CardView(text: "Consumidor de medicamentos", imageName: "fotoCris")
                         }
                         Spacer()
-
                     }.frame(minWidth: 0, maxWidth: .infinity)
                 }
                 Spacer()
             }.frame(minWidth: 1200, maxWidth: .infinity)
+        }.onAppear() {
+            if let news2Compose = self.news2Compose {
+                self.title = news2Compose.news.title
+                self.subtitle = news2Compose.news.subtitle
+                self.text = news2Compose.news.text
+                self.sentences = news2Compose.sentences
+            }
         }
     }
 }
 
 struct CardView: View {
+    @State var text:String
+    @State var imageName:String
+    
     var body: some View {
         HStack (alignment: .center){
             HStack (alignment: .center, spacing: 0){
-                Image("fotoCris")
+                Image(imageName)
                 .resizable()
                 .frame(width: 150, height: 150, alignment: .center)
                 
                 ZStack {
-                    Text("Consumidor de medicamentos")
+                    Text(text)
                         .foregroundColor(.black)
                     .frame(width: 150, height: 150)
                     .background(Color.white)

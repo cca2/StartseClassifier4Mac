@@ -30,6 +30,7 @@
 		DAAEFF632376BBC7001A5F03 /* ConsolidationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEFF622376BBC7001A5F03 /* ConsolidationViewModel.swift */; };
 		DAAEFF6723778322001A5F03 /* OpeningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEFF6623778322001A5F03 /* OpeningView.swift */; };
 		DAB31D0F238B191700447575 /* CardsComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB31D0E238B191700447575 /* CardsComposerView.swift */; };
+		DAB31D11238B757800447575 /* ComposingCardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB31D10238B757800447575 /* ComposingCardsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		DAAEFF622376BBC7001A5F03 /* ConsolidationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsolidationViewModel.swift; sourceTree = "<group>"; };
 		DAAEFF6623778322001A5F03 /* OpeningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OpeningView.swift; path = ../../../StartseNewsClassifier/StartseNewsClassifier/Views/OpeningView.swift; sourceTree = "<group>"; };
 		DAB31D0E238B191700447575 /* CardsComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardsComposerView.swift; path = StartseNewsClassifier4Mac/Views/CardsComposerView.swift; sourceTree = SOURCE_ROOT; };
+		DAB31D10238B757800447575 /* ComposingCardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposingCardsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				DA5D6AE42378358A00A7524B /* NewsViewModel.swift */,
 				DA9682E92375B15300A03A3C /* SentenceViewModel.swift */,
 				DAAEFF622376BBC7001A5F03 /* ConsolidationViewModel.swift */,
+				DAB31D10238B757800447575 /* ComposingCardsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAB31D11238B757800447575 /* ComposingCardsViewModel.swift in Sources */,
 				DA22514623832FA000F173E8 /* TeamRegistrationView.swift in Sources */,
 				DA9ADF3F23848B9300EADD74 /* CommonInterstStudentsView.swift in Sources */,
 				DA9682E42375B0CB00A03A3C /* NewsModel.swift in Sources */,

@@ -21,6 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let contentView = ContentView().environment(\.managedObjectContext, persistentContainer.viewContext)
 //        let contentView = TeamRegistrationView()
 //        let contentView = StudentView()
+//        let contentView = CardsComposerView().environmentObject(\.managedObjectContext, persistentContainer.viewContext)
         
         // Create the window and set the content view. 
         window = NSWindow(
