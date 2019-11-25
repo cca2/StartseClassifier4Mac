@@ -84,6 +84,7 @@ struct CardsComposerView: View {
                         }
                         HStack {
                             CardView(text: "Consumidor de medicamentos", imageName: "fotoCris")
+                            EmptyCardView()
                         }
                         Spacer()
                     }.frame(minWidth: 0, maxWidth: .infinity)
@@ -101,6 +102,17 @@ struct CardsComposerView: View {
     }
 }
 
+struct EmptyCardView: View {
+    var body: some View {
+        HStack (alignment: .center) {
+            Text("novo segmento")
+                .frame(width:300, height: 150)
+                .background(Color.white)
+                .foregroundColor(.black)
+        }
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 150, alignment: .center)
+    }
+}
 struct CardView: View {
     @State var text:String
     @State var imageName:String
@@ -118,7 +130,7 @@ struct CardView: View {
                     .frame(width: 150, height: 150)
                     .background(Color.white)
                     
-                    Text("Segmento").bold().foregroundColor(.black)
+                    Text("Segmento").foregroundColor(.gray).font(.system(size: 11))
                     .frame(width: 150, height: 150, alignment: .leading)
                     .offset(x: 10, y: -60)
                 }
