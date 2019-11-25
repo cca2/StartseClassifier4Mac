@@ -29,6 +29,7 @@
 		DAAEFF612376BAE8001A5F03 /* NewsForClassificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEFF602376BAE8001A5F03 /* NewsForClassificationView.swift */; };
 		DAAEFF632376BBC7001A5F03 /* ConsolidationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEFF622376BBC7001A5F03 /* ConsolidationViewModel.swift */; };
 		DAAEFF6723778322001A5F03 /* OpeningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEFF6623778322001A5F03 /* OpeningView.swift */; };
+		DAB31D0F238B191700447575 /* CardsComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB31D0E238B191700447575 /* CardsComposerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		DAAEFF602376BAE8001A5F03 /* NewsForClassificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewsForClassificationView.swift; path = StartseNewsClassifier4Mac/NewsForClassificationView.swift; sourceTree = SOURCE_ROOT; };
 		DAAEFF622376BBC7001A5F03 /* ConsolidationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsolidationViewModel.swift; sourceTree = "<group>"; };
 		DAAEFF6623778322001A5F03 /* OpeningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OpeningView.swift; path = ../../../StartseNewsClassifier/StartseNewsClassifier/Views/OpeningView.swift; sourceTree = "<group>"; };
+		DAB31D0E238B191700447575 /* CardsComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardsComposerView.swift; path = StartseNewsClassifier4Mac/Views/CardsComposerView.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 		DA2251472383664C00F173E8 /* StudentApp */ = {
 			isa = PBXGroup;
 			children = (
+				DAB31D0E238B191700447575 /* CardsComposerView.swift */,
 				DA22514523832FA000F173E8 /* TeamRegistrationView.swift */,
 				DA22514A23846D2100F173E8 /* StudentView.swift */,
 				DA9ADF3E23848B9300EADD74 /* CommonInterstStudentsView.swift */,
@@ -212,8 +215,8 @@
 		DAAEFF5F2376BA88001A5F03 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DA9682B02375AF0300A03A3C /* ContentView.swift */,
 				DA2251472383664C00F173E8 /* StudentApp */,
+				DA9682B02375AF0300A03A3C /* ContentView.swift */,
 				DAAEFF602376BAE8001A5F03 /* NewsForClassificationView.swift */,
 				DA5D6AE62378D4EE00A7524B /* ConsolidationView.swift */,
 				DAAEFF6623778322001A5F03 /* OpeningView.swift */,
@@ -368,6 +371,7 @@
 				DA9682B42375AF0300A03A3C /* StartseNewsClassifier4Mac.xcdatamodeld in Sources */,
 				DA22514B23846D2100F173E8 /* StudentView.swift in Sources */,
 				DA9682EA2375B15300A03A3C /* SentenceViewModel.swift in Sources */,
+				DAB31D0F238B191700447575 /* CardsComposerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

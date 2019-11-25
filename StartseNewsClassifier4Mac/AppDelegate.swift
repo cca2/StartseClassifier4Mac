@@ -18,9 +18,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
         
-//        let contentView = ContentView().environment(\.managedObjectContext, persistentContainer.viewContext)
+        let contentView = ContentView().environment(\.managedObjectContext, persistentContainer.viewContext)
 //        let contentView = TeamRegistrationView()
-        let contentView = StudentView()
+//        let contentView = StudentView()
         
         // Create the window and set the content view. 
         window = NSWindow(
