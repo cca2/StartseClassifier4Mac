@@ -32,7 +32,11 @@ class NewsFileManagement {
             print("Error:\(error)")
         }
     }
-        
+    
+    func fetchNewsForConsolidation(completion: @escaping () -> ()) {
+        completion()
+    }
+    
     func uploadNewsForClassification(news:NewsModel, completion: @escaping  () -> ()) {
         let news = news
         let newsId = news.news_id

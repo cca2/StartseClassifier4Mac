@@ -14,9 +14,10 @@ struct NewsModel: Encodable, Decodable{
     let subtitle:String
     let link:String
     let text:String
-    
     let links:[String]
-    let links_text:[String]    
+    let links_text:[String]
+//    var isClassified = false
+//    var isConsolidated = false
 }
 
 struct ClassifiedNewsModel: Encodable, Decodable {

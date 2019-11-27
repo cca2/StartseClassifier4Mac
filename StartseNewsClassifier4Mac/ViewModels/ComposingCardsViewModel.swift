@@ -12,23 +12,81 @@ import CloudKit
 
 class ComposingCardsViewModel: ObservableObject {
     private var filterSelection:Int = 0
-    private var context:NSManagedObjectContext
-    private var newsModel:NewsModel? = nil
+    private var context:NSManagedObjectContext!
+    private var newsModel:NewsModel!
     
-    var news: NewsViewModel {
-        var res:NewsViewModel!
-        newsModel = fetchNews()
-        res = NewsViewModel(newsModel: newsModel!)
-        return res
+    var managedObjectContext:NSManagedObjectContext {
+        get {
+            return self.context
+        }
+        
+        set (context) {
+            self.context = context
+            loadNews() {
+                newsViewModel in
+                self.news = newsViewModel
+                self.hasLoadedNews = true
+            }
+        }
     }
+    
+    @Published var news:NewsViewModel?
+    @Published var hasLoadedNews:Bool = false
     
     var sentences:[SentenceViewModel] {
         let sentences = fetchSentences()
         return sentences
     }
     
-    init(context: NSManagedObjectContext) {
-        self.context = context
+    init() {}
+    
+//    init(context: NSManagedObjectContext) {
+//        self.context = context
+//        loadNews() {
+//            newsViewModel in
+//            self.news = newsViewModel
+//            self.hasLoadedNews = true
+//        }
+//    }
+    
+    private func loadNews(completion: @escaping (NewsViewModel) -> ()) {
+        self.hasLoadedNews = false
+        var newsRecord:CKRecord?
+        let container = CKContainer(identifier: "iCloud.br.ufpe.cin.StartseNewsClassifier")
+        let database = container.privateCloudDatabase
+        
+        let predicate = NSPredicate(format: "isClassified == true")
+        
+        let query = CKQuery(recordType: "News", predicate: predicate)
+        query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        
+        let operation = CKQueryOperation(query: query)
+        operation.resultsLimit = 1
+        
+        operation.recordFetchedBlock = {
+            record in
+            newsRecord = record
+        }
+        
+        operation.queryCompletionBlock = {
+            cursor, error in
+            
+            DispatchQueue.main.async {
+                if (error == nil) {
+                    print(">>> Finalizou com Sucesso <<<")
+                    do {
+                        let newsViewModel = try NewsViewModel(record: newsRecord!)
+                        completion(newsViewModel)
+                    }catch {
+                        print ("Error: \(error)")
+                    }
+                }else {
+                    print (">>> FINALIZOU QUERY <<<")
+                    print("Error:\(String(describing: error))")
+                }
+            }
+        }
+        database.add(operation)
     }
     
     private func fetchNews() -> NewsModel? {
@@ -40,16 +98,27 @@ class ComposingCardsViewModel: ObservableObject {
         
         do {
             let classifiedNewsData = try context.fetch(request)
-            let firstClassifiedNews = classifiedNewsData[0]
-            let newsId = firstClassifiedNews.id!
-            let title = firstClassifiedNews.title!
-//            let subtitle = firstClassifiedNews.subtitle!
-            let subtitle = "teste subtitle"
-            let link = firstClassifiedNews.link!
-            let text = firstClassifiedNews.text!
-            let links:[String] = []
-            let linksTexts:[String] = []
-            result = NewsModel(news_id: newsId, title: title, subtitle: subtitle, link: link, text: text, links: links, links_text: linksTexts)
+            
+//            classifiedNewsData.forEach{
+//                classifiedNews in
+//                context.delete(classifiedNews)
+//            }
+//            try context.save()
+
+            if classifiedNewsData.count > 0 {
+                let firstClassifiedNews = classifiedNewsData[0]
+                let newsId = firstClassifiedNews.id!
+                let title = firstClassifiedNews.title!
+    //            let subtitle = firstClassifiedNews.subtitle!
+                let subtitle = "teste subtitle"
+                let link = firstClassifiedNews.link!
+                let text = firstClassifiedNews.text!
+                let links:[String] = []
+                let linksTexts:[String] = []
+                result = NewsModel(news_id: newsId, title: title, subtitle: subtitle, link: link, text: text, links: links, links_text: linksTexts)
+            }else {
+                //Buscar baixar novas Notícias do iCloud (Cloudkit)
+            }
         }catch {
             print("Error: \(error)")
         }
