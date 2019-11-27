@@ -14,6 +14,8 @@ class ComposingCardsViewModel: ObservableObject {
     private var filterSelection:Int = 0
     private var context:NSManagedObjectContext!
     private var newsModel:NewsModel!
+    private var newsRecord:CKRecord?
+    var sentences:[SentenceViewModel] = []
     
     var managedObjectContext:NSManagedObjectContext {
         get {
@@ -22,10 +24,15 @@ class ComposingCardsViewModel: ObservableObject {
         
         set (context) {
             self.context = context
+            self.hasLoadedNews = false
             loadNews() {
                 newsViewModel in
                 self.news = newsViewModel
-                self.hasLoadedNews = true
+                self.loadSentences() {
+                    sentences in
+                    self.sentences = sentences
+                    self.hasLoadedNews = true
+                }
             }
         }
     }
@@ -33,25 +40,83 @@ class ComposingCardsViewModel: ObservableObject {
     @Published var news:NewsViewModel?
     @Published var hasLoadedNews:Bool = false
     
-    var sentences:[SentenceViewModel] {
-        let sentences = fetchSentences()
-        return sentences
-    }
+//    var sentences:[SentenceViewModel] {
+//        let sentences = fetchSentences()
+//        return sentences
+//    }
     
     init() {}
     
-//    init(context: NSManagedObjectContext) {
-//        self.context = context
-//        loadNews() {
-//            newsViewModel in
-//            self.news = newsViewModel
-//            self.hasLoadedNews = true
-//        }
-//    }
+    private func loadSentences(completion: @escaping ([SentenceViewModel]) -> ()) {
+        var sentencesRecords:[CKRecord] = []
+        let container = CKContainer(identifier: "iCloud.br.ufpe.cin.StartseNewsClassifier")
+        let database = container.privateCloudDatabase
+        
+        let predicate = NSPredicate(format: "news == %@", CKRecord.Reference(record: self.newsRecord!, action: .none))
+        //Aqui: precisa definir qual o filtro de classificação aplicar
+        let predicate2 = NSPredicate(format: "containsInvestment == 1")
+        let query = CKQuery(recordType: "ClassifiedSentence", predicate: NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, predicate2]))
+                
+        let operation = CKQueryOperation(query: query)
+        
+        operation.recordFetchedBlock = {
+            record in
+            sentencesRecords.append(record)
+        }
+        
+        operation.queryCompletionBlock = {
+            cursor, error in
+            DispatchQueue.main.async {
+                if (error == nil) {
+                    print(">>> Finalizou com Sucesso <<<")
+                    var sentences:[SentenceViewModel] = []
+                    sentencesRecords.forEach {
+                        sentence in
+                        let id = sentence["id"] as! String
+                        let text = sentence["text"] as! String
+
+                        var classifications:[SentenceModel.Classification] = []
+                        let containsInvestment = sentence["containsInvestment"] as! Bool
+                        let containsSegment = sentence["containsSegment"] as! Bool
+                        let containsJob = sentence["containsJob"] as! Bool
+                        let containsOutcome = sentence["containsOutcome"] as! Bool
+                        let containsTechnology = sentence["containsTechnology"] as! Bool
+                        let containsSolution = sentence["containsSolution"] as! Bool
+                        
+                        if containsSegment {
+                            classifications.append(.segment)
+                        }
+                        if containsJob {
+                            classifications.append(.job)
+                        }
+                        if containsOutcome {
+                            classifications.append(.outcome)
+                        }
+                        if containsSolution {
+                            classifications.append(.solution)
+                        }
+                        if containsTechnology {
+                            classifications.append(.technology)
+                        }
+                        if containsInvestment {
+                            classifications.append(.investment)
+                        }
+                        let sentenceModel = SentenceModel(id: UUID(uuidString: id)!, text: text, classifications: classifications)
+                        let sentenceViewModel = SentenceViewModel(sentenceModel: sentenceModel)
+                        sentences.append(sentenceViewModel)
+                    }
+                    completion(sentences)
+                }else {
+                    print (">>> FINALIZOU QUERY <<<")
+                    print("Error:\(String(describing: error))")
+                }
+            }
+        }
+        database.add(operation)
+    }
     
     private func loadNews(completion: @escaping (NewsViewModel) -> ()) {
-        self.hasLoadedNews = false
-        var newsRecord:CKRecord?
+//        var newsRecord:CKRecord?
         let container = CKContainer(identifier: "iCloud.br.ufpe.cin.StartseNewsClassifier")
         let database = container.privateCloudDatabase
         
@@ -65,7 +130,7 @@ class ComposingCardsViewModel: ObservableObject {
         
         operation.recordFetchedBlock = {
             record in
-            newsRecord = record
+            self.newsRecord = record
         }
         
         operation.queryCompletionBlock = {
@@ -75,7 +140,7 @@ class ComposingCardsViewModel: ObservableObject {
                 if (error == nil) {
                     print(">>> Finalizou com Sucesso <<<")
                     do {
-                        let newsViewModel = try NewsViewModel(record: newsRecord!)
+                        let newsViewModel = try NewsViewModel(record: self.newsRecord!)
                         completion(newsViewModel)
                     }catch {
                         print ("Error: \(error)")

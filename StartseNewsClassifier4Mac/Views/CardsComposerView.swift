@@ -66,7 +66,7 @@ struct CardsComposerView: View {
                     VStack{
                         Text("Sentenças").font(.title)
                         List {
-                            ForEach(sentences) {
+                            ForEach(self.news2Compose.sentences) {
                                 sentence in
                                 VStack {
                                     Text(sentence.text)

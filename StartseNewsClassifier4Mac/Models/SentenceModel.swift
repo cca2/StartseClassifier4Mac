@@ -17,20 +17,20 @@ class SentenceModel: Identifiable, Decodable {
     enum Classification:String, Decodable, Encodable, CaseIterable {
         case none = "#None"
         case segment = "#Segment"
-        case problem = "#Problem"
+        case job = "#Job"
+        case outcome = "#Outcome"
         case solution = "#Features"
         case technology = "#Technology"
         case investment = "#Investment"
-        case partnership = "#Partnership"
         
         init?(id: Int) {
             switch id {
             case 1: self = .segment
-            case 2: self = .problem
-            case 3: self = .solution
-            case 4: self = .technology
-            case 5: self = .investment
-            case 6: self = .partnership
+            case 2: self = .job
+            case 3: self = .outcome
+            case 4: self = .solution
+            case 5: self = .technology
+            case 6: self = .investment
             default:
                 self = .none
             }
