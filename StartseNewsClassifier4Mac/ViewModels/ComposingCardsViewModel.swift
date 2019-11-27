@@ -17,6 +17,13 @@ class ComposingCardsViewModel: ObservableObject {
     private var newsRecord:CKRecord?
     var sentences:[SentenceViewModel] = []
     
+    var segmentSentences:[SentenceViewModel] = []
+    var jobSentences:[SentenceViewModel] = []
+    var outcomeSentences:[SentenceViewModel] = []
+    var solutionSentences:[SentenceViewModel] = []
+    var technologySentences:[SentenceViewModel] = []
+    var investmentSentences:[SentenceViewModel] = []
+
     var managedObjectContext:NSManagedObjectContext {
         get {
             return self.context
@@ -39,12 +46,8 @@ class ComposingCardsViewModel: ObservableObject {
     
     @Published var news:NewsViewModel?
     @Published var hasLoadedNews:Bool = false
-    
-//    var sentences:[SentenceViewModel] {
-//        let sentences = fetchSentences()
-//        return sentences
-//    }
-    
+    @Published var classificationFilter:SentenceModel.Classification = .job
+        
     init() {}
     
     private func loadSentences(completion: @escaping ([SentenceViewModel]) -> ()) {
@@ -54,8 +57,23 @@ class ComposingCardsViewModel: ObservableObject {
         
         let predicate = NSPredicate(format: "news == %@", CKRecord.Reference(record: self.newsRecord!, action: .none))
         //Aqui: precisa definir qual o filtro de classificação aplicar
-        let predicate2 = NSPredicate(format: "containsInvestment == 1")
-        let query = CKQuery(recordType: "ClassifiedSentence", predicate: NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, predicate2]))
+//        let predicate2:NSPredicate!
+//        if classificationFilter == .segment {
+//            predicate2 = NSPredicate(format: "containsSegment == 1")
+//        }else if classificationFilter == .job {
+//            predicate2 = NSPredicate(format: "containsJob == 1")
+//        }else if classificationFilter == .outcome {
+//            predicate2 = NSPredicate(format: "containsOutcome == 1")
+//        }else if classificationFilter == .solution {
+//            predicate2 = NSPredicate(format: "containsSolution == 1")
+//        }else if classificationFilter == .technology {
+//            predicate2 = NSPredicate(format: "containsTechnology == 1")
+//        }else if classificationFilter == .investment {
+//            predicate2 = NSPredicate(format: "containsInvestment == 1")
+//        }else {
+//            predicate2 = NSPredicate(format: "containsSegment == 1")
+//        }
+        let query = CKQuery(recordType: "ClassifiedSentence", predicate: NSCompoundPredicate(andPredicateWithSubpredicates: [predicate]))
                 
         let operation = CKQueryOperation(query: query)
         
@@ -104,6 +122,28 @@ class ComposingCardsViewModel: ObservableObject {
                         let sentenceModel = SentenceModel(id: UUID(uuidString: id)!, text: text, classifications: classifications)
                         let sentenceViewModel = SentenceViewModel(sentenceModel: sentenceModel)
                         sentences.append(sentenceViewModel)
+                    }
+                    
+                    sentences.forEach {
+                        sentence in
+                        if sentence.containsSegment {
+                            self.segmentSentences.append(sentence)
+                        }
+                        if sentence.containsJob {
+                            self.jobSentences.append(sentence)
+                        }
+                        if sentence.containsOutcome {
+                            self.outcomeSentences.append(sentence)
+                        }
+                        if sentence.containsSolution {
+                            self.solutionSentences.append(sentence)
+                        }
+                        if sentence.containsTechnology {
+                            self.technologySentences.append(sentence)
+                        }
+                        if sentence.containsInvestment {
+                            self.investmentSentences.append(sentence)
+                        }
                     }
                     completion(sentences)
                 }else {

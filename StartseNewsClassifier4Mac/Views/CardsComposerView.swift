@@ -60,18 +60,97 @@ struct CardsComposerView: View {
             .frame(minWidth: 300, idealWidth: 300, maxWidth: 300, minHeight: 600, maxHeight: .infinity, alignment: .center)
             Divider()
             VStack {
-                Text("Segmentos de Consumidor").font(.title).padding()
+                VStack {
+                    if self.news2Compose.classificationFilter == .segment {
+                        Text("Segmentos de Consumidor").font(.title).padding()
+                    }else if self.news2Compose.classificationFilter == .job {
+                        Text("Job to be done").font(.title).padding()
+                    }else if self.news2Compose.classificationFilter == .outcome {
+                        Text("Resultado Desejado").font(.title).padding()
+                    }else if self.news2Compose.classificationFilter == .solution {
+                        Text("Solução & Features").font(.title).padding()
+                    }else if self.news2Compose.classificationFilter == .technology {
+                        Text("Tecnologia").font(.title).padding()
+                    }else if self.news2Compose.classificationFilter == .investment {
+                        Text("Investimento").font(.title).padding()
+                    }
+                    HStack {
+                        Button(action: {self.news2Compose.classificationFilter = .segment}, label: {Text("segmentos")})
+                        Button(action: {self.news2Compose.classificationFilter = .job}, label: {Text("job to be done")})
+                        Button(action: {self.news2Compose.classificationFilter = .outcome}, label: {Text("resultado")})
+                        Button(action: {self.news2Compose.classificationFilter = .solution}, label: {Text("solução & features")})
+                        Button(action: {self.news2Compose.classificationFilter = .technology}, label: {Text("tecnologia")})
+                        Button(action: {self.news2Compose.classificationFilter = .investment}, label: {Text("investimento")})
+                    }
+                }
                 Divider()
                 HStack {
                     VStack{
                         Text("Sentenças").font(.title)
-                        List {
-                            ForEach(self.news2Compose.sentences) {
-                                sentence in
-                                VStack {
-                                    Text(sentence.text)
-                                        .frame(width:190)
-                                    Divider()
+                        if self.news2Compose.classificationFilter == .segment {
+                            List {
+                                ForEach(self.news2Compose.segmentSentences) {
+                                    sentence in
+                                    VStack {
+                                        Text(sentence.text)
+                                            .frame(width:190)
+                                        Divider()
+                                    }
+                                }
+                            }
+                        }else if self.news2Compose.classificationFilter == .job {
+                            List {
+                                ForEach(self.news2Compose.jobSentences) {
+                                    sentence in
+                                    VStack {
+                                        Text(sentence.text)
+                                            .frame(width:190)
+                                        Divider()
+                                    }
+                                }
+                            }
+                        }else if self.news2Compose.classificationFilter == .outcome {
+                            List {
+                                ForEach(self.news2Compose.outcomeSentences) {
+                                    sentence in
+                                    VStack {
+                                        Text(sentence.text)
+                                            .frame(width:190)
+                                        Divider()
+                                    }
+                                }
+                            }
+                        }else if self.news2Compose.classificationFilter == .solution {
+                            List {
+                                ForEach(self.news2Compose.solutionSentences) {
+                                    sentence in
+                                    VStack {
+                                        Text(sentence.text)
+                                            .frame(width:190)
+                                        Divider()
+                                    }
+                                }
+                            }
+                        }else if self.news2Compose.classificationFilter == .technology {
+                            List {
+                                ForEach(self.news2Compose.technologySentences) {
+                                    sentence in
+                                    VStack {
+                                        Text(sentence.text)
+                                            .frame(width:190)
+                                        Divider()
+                                    }
+                                }
+                            }
+                        }else if self.news2Compose.classificationFilter == .investment {
+                            List {
+                                ForEach(self.news2Compose.investmentSentences) {
+                                    sentence in
+                                    VStack {
+                                        Text(sentence.text)
+                                            .frame(width:190)
+                                        Divider()
+                                    }
                                 }
                             }
                         }
