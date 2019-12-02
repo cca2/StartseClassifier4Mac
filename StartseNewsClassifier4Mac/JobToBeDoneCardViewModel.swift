@@ -226,8 +226,12 @@ class JobToBeDoneCardCreator {
                     if s != "" {
                         res.append("\(s.trimmingCharacters(in: .whitespacesAndNewlines))")
                     }
-                    s = "\(sentence[range])"
-                    s = lemmatizeVerb(word: s)
+                    let lemmatizedVerb = lemmatizeVerb(word: "\(sentence[range])")
+                    if !verbsToIgnore.contains(lemmatizedVerb) {
+                        s = lemmatizedVerb
+                    }else {
+                        s = ""
+                    }
                 }else {
                     s += "\(sentence[range])"
                 }
