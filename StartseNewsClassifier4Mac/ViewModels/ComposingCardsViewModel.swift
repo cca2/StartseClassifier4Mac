@@ -23,6 +23,9 @@ class ComposingCardsViewModel: ObservableObject {
     var solutionSentences:[SentenceViewModel] = []
     var technologySentences:[SentenceViewModel] = []
     var investmentSentences:[SentenceViewModel] = []
+    
+    var jobToBeDoneCardCreator:JobToBeDoneCardCreator = JobToBeDoneCardCreator()
+    var jobToBeDoneCards:[JobToBeDoneCardViewModel] = []
 
     var managedObjectContext:NSManagedObjectContext {
         get {
@@ -131,6 +134,11 @@ class ComposingCardsViewModel: ObservableObject {
                         }
                         if sentence.containsJob {
                             self.jobSentences.append(sentence)
+                            let sentenceCards = self.jobToBeDoneCardCreator.extractCards(from: sentence.sentence)
+                            sentenceCards.forEach {
+                                card in
+                                self.jobToBeDoneCards.append(card)
+                            }
                         }
                         if sentence.containsOutcome {
                             self.outcomeSentences.append(sentence)

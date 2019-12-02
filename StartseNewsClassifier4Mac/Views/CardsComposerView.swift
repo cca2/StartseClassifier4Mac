@@ -18,16 +18,14 @@ struct CardsComposerView: View {
     
     @State var sentences:[SentenceViewModel] = [SentenceViewModel(sentenceModel: SentenceModel(id: UUID(), text: "Esta é uma sentença muito legal", classifications: [.segment])), SentenceViewModel(sentenceModel: SentenceModel(id: UUID(), text: "Esta é uma sentença muito legal", classifications: [.segment]))]
     
+    @State var cards:[JobToBeDoneCardViewModel] = []
+    
     init() {
-//        self.news2Compose = nil
         self.news2Compose = ComposingCardsViewModel()
         let sentence1 = SentenceViewModel(sentenceModel: SentenceModel(id: UUID(), text: "Esta é uma sentença muito legal", classifications: [.segment]))
         self.sentences.append(sentence1)
+        self.cards = self.news2Compose.jobToBeDoneCards
     }
-    
-//    init(context:NSManagedObjectContext) {
-//        self.news2Compose = ComposingCardsViewModel(context: context)
-//    }
     
     var body: some View {
         HStack {
@@ -53,7 +51,6 @@ struct CardsComposerView: View {
                     }else {
                         Text(text)
                     }
-//                    Text(text)
                 }.padding()
                 Spacer()
             }
@@ -167,18 +164,24 @@ struct CardsComposerView: View {
                     Spacer()
                     VStack (alignment: .center){
                         Text("Cartões").font(.title)
-                        HStack {
-                            CardView(text: "Farmácias", imageName: "segmento-farmacia")
-                            CardView(text: "Clínicas", imageName: "segmento-clinica-medica")
+                        List {
+                            ForEach(self.news2Compose.jobToBeDoneCards) {
+                                card in
+                                CardView(text: card.text, imageName: "segmento-farmacia")
+                            }
                         }
-                        HStack {
-                            CardView(text: "Distribuidor de medicamento", imageName: "segmento-distribuidora")
-                            CardView(text: "Fabricante de medicamentos", imageName: "segmento-fabricante")
-                        }
-                        HStack {
-                            CardView(text: "Consumidor de medicamentos", imageName: "fotoCris")
-                            EmptyCardView()
-                        }
+//                        HStack {
+//                            CardView(text: "Farmácias", imageName: "segmento-farmacia")
+//                            CardView(text: "Clínicas", imageName: "segmento-clinica-medica")
+//                        }
+//                        HStack {
+//                            CardView(text: "Distribuidor de medicamento", imageName: "segmento-distribuidora")
+//                            CardView(text: "Fabricante de medicamentos", imageName: "segmento-fabricante")
+//                        }
+//                        HStack {
+//                            CardView(text: "Consumidor de medicamentos", imageName: "fotoCris")
+//                            EmptyCardView()
+//                        }
                         Spacer()
                     }.frame(minWidth: 0, maxWidth: .infinity)
                 }
@@ -220,7 +223,8 @@ struct CardView: View {
                 
                 ZStack {
                     Text(text)
-                        .foregroundColor(.black)
+                    .padding()
+                    .foregroundColor(.black)
                     .frame(width: 150, height: 150)
                     .background(Color.white)
                     

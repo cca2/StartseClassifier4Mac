@@ -64,6 +64,24 @@ class NewsViewModel: Identifiable, Equatable {
     }
     
     var text:String {
-        return news.text
+        var res = ""
+        let tagger = NLTagger(tagSchemes: [.nameTypeOrLexicalClass, .lexicalClass, .lemma, .tokenType])
+        tagger.string = news.text
+        let range = news.text.startIndex ..< news.text.endIndex
+        tagger.enumerateTags(in: range, unit: .word, scheme: .tokenType, options: []) {
+            (tag, range) in
+            if let tag = tag {
+                res += "\(news.text[range])"
+                if tag == .punctuation {
+                    let punctuation = "\(news.text[range])"
+                    if punctuation == "." {
+                        res += "\n\n"
+                    }
+                }
+            }
+            return true
+        }
+
+        return res
     }
 }

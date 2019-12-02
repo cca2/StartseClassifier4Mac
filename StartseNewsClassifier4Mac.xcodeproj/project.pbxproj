@@ -31,6 +31,7 @@
 		DAAEFF6723778322001A5F03 /* OpeningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEFF6623778322001A5F03 /* OpeningView.swift */; };
 		DAB31D0F238B191700447575 /* CardsComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB31D0E238B191700447575 /* CardsComposerView.swift */; };
 		DAB31D11238B757800447575 /* ComposingCardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB31D10238B757800447575 /* ComposingCardsViewModel.swift */; };
+		DAB31D132393FB2200447575 /* JobToBeDoneCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB31D122393FB2200447575 /* JobToBeDoneCardViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		DAAEFF6623778322001A5F03 /* OpeningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OpeningView.swift; path = ../../../StartseNewsClassifier/StartseNewsClassifier/Views/OpeningView.swift; sourceTree = "<group>"; };
 		DAB31D0E238B191700447575 /* CardsComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardsComposerView.swift; path = StartseNewsClassifier4Mac/Views/CardsComposerView.swift; sourceTree = SOURCE_ROOT; };
 		DAB31D10238B757800447575 /* ComposingCardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposingCardsViewModel.swift; sourceTree = "<group>"; };
+		DAB31D122393FB2200447575 /* JobToBeDoneCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JobToBeDoneCardViewModel.swift; path = StartseNewsClassifier4Mac/JobToBeDoneCardViewModel.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 				DA9682E92375B15300A03A3C /* SentenceViewModel.swift */,
 				DAAEFF622376BBC7001A5F03 /* ConsolidationViewModel.swift */,
 				DAB31D10238B757800447575 /* ComposingCardsViewModel.swift */,
+				DAB31D122393FB2200447575 /* JobToBeDoneCardViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -290,7 +293,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1110;
-				LastUpgradeCheck = 1110;
+				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = "Cristiano Araújo";
 				TargetAttributes = {
 					DA9682AA2375AF0300A03A3C = {
@@ -366,6 +369,7 @@
 				DA8599CB2377933E009A10F9 /* FileManagement.swift in Sources */,
 				DA9682B12375AF0300A03A3C /* ContentView.swift in Sources */,
 				DAAEFF6723778322001A5F03 /* OpeningView.swift in Sources */,
+				DAB31D132393FB2200447575 /* JobToBeDoneCardViewModel.swift in Sources */,
 				DAAEFF612376BAE8001A5F03 /* NewsForClassificationView.swift in Sources */,
 				DA8599CF23779836009A10F9 /* NewsForClassificationViewModel.swift in Sources */,
 				DA9682E62375B0D600A03A3C /* SentenceModel.swift in Sources */,
@@ -540,6 +544,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = StartseNewsClassifier4Mac/StartseNewsClassifier4Mac.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"StartseNewsClassifier4Mac/Preview Content\"";
@@ -563,6 +568,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = StartseNewsClassifier4Mac/StartseNewsClassifier4Mac.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"StartseNewsClassifier4Mac/Preview Content\"";
