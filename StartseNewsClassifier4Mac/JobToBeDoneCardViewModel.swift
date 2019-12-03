@@ -9,19 +9,38 @@
 import Foundation
 import NaturalLanguage
 
+extension Array where Element == (NLTag, String) {
+  func contains(array elements: [NLTag]) -> Int {
+    guard elements.count > 0 else { return 0 }
+    guard count > 0 else { return -1 }
+
+    var ti = 0
+
+    for (index, element) in self.enumerated() {
+        let e:(NLTag, String) = element
+        ti = elements[ti] == e.0 ? ti + 1 : 0
+
+        if ti == elements.count {
+            return index - elements.count + 1
+        }
+    }
+    return -1
+  }
+}
+
 class JobToBeDoneCardViewModel: Identifiable {
     let id:UUID!
     let category:SentenceModel.Classification
     let sentence:SentenceModel!
     
     var verb:(NLTag, String)!
-    var noum:(NLTag, String)!
+    var object:[(NLTag, String)] = []
     var contextClarifier:[(NLTag,String)] = []
 
     var text:String {
         var res = ""
         res += verb.1
-        res += " \(noum.1)"
+//        res += " \(object.1)"
         contextClarifier.forEach {
             tag in
             if tag.0 == .punctuation {
@@ -31,6 +50,21 @@ class JobToBeDoneCardViewModel: Identifiable {
             }
         }
         return res
+    }
+    
+    var verbText:String {
+        return verb.1
+    }
+    
+    var objectText:String {
+        var res = ""
+        res += object.map{$0.1}.joined(separator: " ")
+        return res
+    }
+    
+    var contextClarifierText: String {
+        let strings = contextClarifier.map{ $0.1 }
+        return strings.joined(separator: " ")
     }
     
     init(sentence:SentenceModel, category:SentenceModel.Classification) {
@@ -94,8 +128,12 @@ class JobToBeDoneCardCreator {
         return res
     }
     
+    private func parseDirectObject(sequence:ArraySlice<(NLTag, String)>) -> Bool {
+        return true
+    }
+    
     private func identifyVerbObjectContextClarifier(originalSentence:SentenceModel, refinedText:String) -> JobToBeDoneCardViewModel? {
-        var card:JobToBeDoneCardViewModel? = JobToBeDoneCardViewModel(sentence: originalSentence, category: .job)
+        var card:JobToBeDoneCardViewModel?
         var tags:[(NLTag, String)] = []
         
         let sentence = refinedText
@@ -114,37 +152,37 @@ class JobToBeDoneCardCreator {
             }
             return true
         }
-        //procura verbo
-        var verbTag:(NLTag, String)?
-        var nounTag:(NLTag, String)?
-        var contextClarifierTags:[(NLTag, String)] = []
-        tags.forEach {
-            tag in
-            if verbTag == nil {
-                if tag.0 == .verb {
-                    verbTag = tag
-                }
-            }else if nounTag == nil {
-                if tag.0 == .noun {
-                    nounTag = tag
-                }
-//                else {
-//                    verbTag = nil
-//                }
-            }else {
-                contextClarifierTags.append(tag)
-            }
-        }
-        if let verbTag = verbTag {
-            card!.verb = verbTag
-            if let nounTag = nounTag {
-                card!.noum = nounTag
-            }else {
-                card = nil
-            }
-            card!.contextClarifier = contextClarifierTags
+        
+        var index = tags.contains(array: [.verb, .noun])
+        if index >= 0 {
+            card = JobToBeDoneCardViewModel(sentence: originalSentence, category: .job)
+            card?.verb = tags[0]
+            card?.object.append(tags[1])
+            card?.contextClarifier = Array(tags[(index + 2)...])
         }else {
-            card = nil
+            index = tags.contains(array: [.verb, .preposition, .noun, .conjunction, .noun])
+            if index >= 0 {
+                card = JobToBeDoneCardViewModel(sentence: originalSentence, category: .job)
+                card?.verb = tags[0]
+                card?.object.append(contentsOf: tags[1...4])
+                card?.contextClarifier = Array(tags[(index + 5)...])
+            }else {
+                index = tags.contains(array: [.verb, .determiner, .noun])
+                if index >= 0 {
+                    card = JobToBeDoneCardViewModel(sentence: originalSentence, category: .job)
+                    card?.verb = tags[0]
+                    card?.object.append(contentsOf: tags[1...2])
+                    card?.contextClarifier = Array(tags[(index + 3)...])
+                }else {
+                    index = tags.contains(array: [.verb, .preposition, .noun])
+                    if index >= 0 {
+                        card = JobToBeDoneCardViewModel(sentence: originalSentence, category: .job)
+                        card?.verb = tags[0]
+                        card?.object.append(contentsOf: tags[1...2])
+                        card?.contextClarifier = Array(tags[(index + 3)...])
+                    }
+                }
+            }
         }
         
         if let card = card {

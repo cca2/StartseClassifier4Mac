@@ -55,7 +55,7 @@ struct CardsComposerView: View {
                 }.padding()
                 Spacer()
             }
-            .frame(minWidth: 300, maxWidth: 500, minHeight: 600, maxHeight: .infinity, alignment: .center)
+            .frame(minWidth: 300, maxWidth: 300, minHeight: 600, maxHeight: .infinity, alignment: .center)
             Divider()
             VStack {
                 VStack {
@@ -163,31 +163,19 @@ struct CardsComposerView: View {
 //                    .frame(minWidth: 200, idealWidth: 100, maxWidth: 200, alignment: .center)
                     Divider()
                     Spacer()
-                    VStack (alignment: .center){
+                    VStack (alignment: .leading){
                         Text("Cartões").font(.title)
                         List {
                             ForEach(self.news2Compose.jobToBeDoneCards) {
                                 card in
-                                CardView(text: card.text, imageName: "segmento-farmacia")
+                                CardView(card: card, imageName: "segmento-farmacia")
                             }
                         }
-//                        HStack {
-//                            CardView(text: "Farmácias", imageName: "segmento-farmacia")
-//                            CardView(text: "Clínicas", imageName: "segmento-clinica-medica")
-//                        }
-//                        HStack {
-//                            CardView(text: "Distribuidor de medicamento", imageName: "segmento-distribuidora")
-//                            CardView(text: "Fabricante de medicamentos", imageName: "segmento-fabricante")
-//                        }
-//                        HStack {
-//                            CardView(text: "Consumidor de medicamentos", imageName: "fotoCris")
-//                            EmptyCardView()
-//                        }
                         Spacer()
                     }.frame(minWidth: 0, maxWidth: .infinity)
                 }
                 Spacer()
-            }.frame(minWidth: 1200, maxWidth: .infinity)
+            }.frame(minWidth: 800, maxWidth: .infinity)
         }.onAppear() {
             self.news2Compose.managedObjectContext = self.context
 //            if let news2Compose = self.news2Compose {
@@ -212,7 +200,7 @@ struct EmptyCardView: View {
     }
 }
 struct CardView: View {
-    @State var text:String
+    @State var card:JobToBeDoneCardViewModel
     @State var imageName:String
     
     var body: some View {
@@ -223,7 +211,11 @@ struct CardView: View {
                 .frame(width: 150, height: 100, alignment: .center)
                 
                 ZStack {
-                    Text(text)
+                    VStack (alignment: .leading) {
+                        Text(card.verbText)
+                        Text(card.objectText)
+                        Text(card.contextClarifierText)
+                    }
                     .padding()
                     .foregroundColor(.black)
                     .frame(width: 300, height: 100)
