@@ -53,6 +53,10 @@ class ComposingCardsViewModel: ObservableObject {
         
     init() {}
     
+    func nextNews() {
+        
+    }
+    
     private func loadSentences(completion: @escaping ([SentenceViewModel]) -> ()) {
         var sentencesRecords:[CKRecord] = []
         let container = CKContainer(identifier: "iCloud.br.ufpe.cin.StartseNewsClassifier")
@@ -164,7 +168,6 @@ class ComposingCardsViewModel: ObservableObject {
     }
     
     private func loadNews(completion: @escaping (NewsViewModel) -> ()) {
-//        var newsRecord:CKRecord?
         let container = CKContainer(identifier: "iCloud.br.ufpe.cin.StartseNewsClassifier")
         let database = container.privateCloudDatabase
         

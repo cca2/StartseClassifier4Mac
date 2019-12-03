@@ -32,6 +32,7 @@ struct CardsComposerView: View {
             VStack {
                 HStack {
                     Text("Notícia").font(.title).padding()
+                    Button(action: {}, label: {Text("próxima")})
                 }
                 Divider()
                 Spacer()
@@ -54,7 +55,7 @@ struct CardsComposerView: View {
                 }.padding()
                 Spacer()
             }
-            .frame(minWidth: 300, idealWidth: 300, maxWidth: 300, minHeight: 600, maxHeight: .infinity, alignment: .center)
+            .frame(minWidth: 300, maxWidth: 500, minHeight: 600, maxHeight: .infinity, alignment: .center)
             Divider()
             VStack {
                 VStack {
@@ -154,12 +155,12 @@ struct CardsComposerView: View {
                         Spacer()
                     }
                     .frame(minWidth: 200, idealWidth: 100, maxWidth: 200, alignment: .center)
-                    Divider()
-                    VStack{
-                        Text("Termos").font(.title)
-                        Spacer()
-                    }
-                    .frame(minWidth: 200, idealWidth: 100, maxWidth: 200, alignment: .center)
+//                    Divider()
+//                    VStack{
+//                        Text("Termos").font(.title)
+//                        Spacer()
+//                    }
+//                    .frame(minWidth: 200, idealWidth: 100, maxWidth: 200, alignment: .center)
                     Divider()
                     Spacer()
                     VStack (alignment: .center){
@@ -203,7 +204,7 @@ struct EmptyCardView: View {
     var body: some View {
         HStack (alignment: .center) {
             Text("novo segmento")
-                .frame(width:300, height: 150)
+                .frame(width:300, height: 100)
                 .background(Color.white)
                 .foregroundColor(.black)
         }
@@ -219,22 +220,22 @@ struct CardView: View {
             HStack (alignment: .center, spacing: 0){
                 Image(imageName)
                 .resizable()
-                .frame(width: 150, height: 150, alignment: .center)
+                .frame(width: 150, height: 100, alignment: .center)
                 
                 ZStack {
                     Text(text)
                     .padding()
                     .foregroundColor(.black)
-                    .frame(width: 150, height: 150)
+                    .frame(width: 300, height: 100)
                     .background(Color.white)
                     
                     Text("Segmento").foregroundColor(.gray).font(.system(size: 11))
-                    .frame(width: 150, height: 150, alignment: .leading)
-                    .offset(x: 10, y: -60)
+                    .frame(width: 300, height: 100, alignment: .leading)
+                    .offset(x: 10, y: -40)
                 }
             }
         }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 150, alignment: .center)
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 100, alignment: .center)
     }
 }
 

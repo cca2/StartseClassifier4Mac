@@ -41,7 +41,7 @@ class JobToBeDoneCardViewModel: Identifiable {
 }
 
 class JobToBeDoneCardCreator {
-    let verbsToIgnore = ["utilizar", "poder", "ser", "permitir", "possuir", "ter", "estar", "aumentar", "melhorar", "existir", "usar", "ajudar"]
+    let verbsToIgnore = ["utilizar", "poder", "ser", "permitir", "possuir", "ter", "estar", "aumentar", "melhorar", "existir", "usar", "ajudar", "adquirir", "adotar"]
     let notAPortugueseVerb = ["item", "similar"]
     let name2VerbDict:[String:String] = ["verificação de": "verificar", "verificação da": "verificar a", "verificação do": "verificar o"]
     
