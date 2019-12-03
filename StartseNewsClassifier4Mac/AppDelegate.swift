@@ -32,7 +32,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.setFrameAutosaveName("Main Window")
         window.contentView = NSHostingView(rootView: contentView)
         window.makeKeyAndOrderFront(nil)
-        window.setFrame(NSRect(x: 100, y: 400, width: 1440, height: 600), display: true)
+        window.setFrame(NSRect(x: 100, y: 400, width: 800, height: 600), display: true)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
