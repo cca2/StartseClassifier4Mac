@@ -199,37 +199,6 @@ struct EmptyCardView: View {
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 150, alignment: .center)
     }
 }
-struct CardView: View {
-    @State var card:JobToBeDoneCardViewModel
-    @State var imageName:String
-    
-    var body: some View {
-        HStack (alignment: .center){
-            HStack (alignment: .center, spacing: 0){
-                Image(imageName)
-                .resizable()
-                .frame(width: 150, height: 100, alignment: .center)
-                
-                ZStack {
-                    VStack (alignment: .leading) {
-                        Text(card.verbText)
-                        Text(card.objectText)
-                        Text(card.contextClarifierText)
-                    }
-                    .padding()
-                    .foregroundColor(.black)
-                    .frame(width: 300, height: 100)
-                    .background(Color.white)
-                    
-                    Text("Segmento").foregroundColor(.gray).font(.system(size: 11))
-                    .frame(width: 300, height: 100, alignment: .leading)
-                    .offset(x: 10, y: -40)
-                }
-            }
-        }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 100, alignment: .center)
-    }
-}
 
 struct CardsComposerView_Previews: PreviewProvider {
     static var previews: some View {

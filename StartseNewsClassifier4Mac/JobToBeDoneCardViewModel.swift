@@ -72,6 +72,17 @@ class JobToBeDoneCardViewModel: Identifiable {
         self.sentence = sentence
         self.id = sentence.id
     }
+    
+    init() {
+        //Usado apenas para efeito de preview
+        self.category = .job
+        self.sentence = SentenceModel(text: "Sentença de teste", classifications: [.job])
+        self.id = UUID()
+        
+        self.verb = (.verb, "Verbo")
+        self.object = [(.noun, "nome")]
+        self.contextClarifier = [(.preposition, "de"), (.noun, "nada")]
+    }
 }
 
 class JobToBeDoneCardCreator {

@@ -32,6 +32,7 @@
 		DAB31D0F238B191700447575 /* CardsComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB31D0E238B191700447575 /* CardsComposerView.swift */; };
 		DAB31D11238B757800447575 /* ComposingCardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB31D10238B757800447575 /* ComposingCardsViewModel.swift */; };
 		DAB31D132393FB2200447575 /* JobToBeDoneCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB31D122393FB2200447575 /* JobToBeDoneCardViewModel.swift */; };
+		DAB31D1523971C2900447575 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB31D1423971C2900447575 /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		DAB31D0E238B191700447575 /* CardsComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardsComposerView.swift; path = StartseNewsClassifier4Mac/Views/CardsComposerView.swift; sourceTree = SOURCE_ROOT; };
 		DAB31D10238B757800447575 /* ComposingCardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposingCardsViewModel.swift; sourceTree = "<group>"; };
 		DAB31D122393FB2200447575 /* JobToBeDoneCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JobToBeDoneCardViewModel.swift; path = StartseNewsClassifier4Mac/JobToBeDoneCardViewModel.swift; sourceTree = SOURCE_ROOT; };
+		DAB31D1423971C2900447575 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardView.swift; path = StartseNewsClassifier4Mac/CardView.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				DAB31D0E238B191700447575 /* CardsComposerView.swift */,
+				DAB31D1423971C2900447575 /* CardView.swift */,
 				DA22514523832FA000F173E8 /* TeamRegistrationView.swift */,
 				DA22514A23846D2100F173E8 /* StudentView.swift */,
 				DA9ADF3E23848B9300EADD74 /* CommonInterstStudentsView.swift */,
@@ -375,6 +378,7 @@
 				DA9682E62375B0D600A03A3C /* SentenceModel.swift in Sources */,
 				DA5D6AE72378D4EE00A7524B /* ConsolidationView.swift in Sources */,
 				DA9682AF2375AF0300A03A3C /* AppDelegate.swift in Sources */,
+				DAB31D1523971C2900447575 /* CardView.swift in Sources */,
 				DA5D6AE52378358A00A7524B /* NewsViewModel.swift in Sources */,
 				DA9682B42375AF0300A03A3C /* StartseNewsClassifier4Mac.xcdatamodeld in Sources */,
 				DA22514B23846D2100F173E8 /* StudentView.swift in Sources */,
