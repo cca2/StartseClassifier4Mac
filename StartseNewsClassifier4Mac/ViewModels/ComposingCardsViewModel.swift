@@ -25,7 +25,7 @@ class ComposingCardsViewModel: ObservableObject {
     var investmentSentences:[SentenceViewModel] = []
     
     var jobToBeDoneCardCreator:JobToBeDoneCardCreator = JobToBeDoneCardCreator()
-    var jobToBeDoneCards:[JobToBeDoneCardViewModel] = []
+    @Published var jobToBeDoneCards:[JobToBeDoneCardViewModel] = []
 
     var managedObjectContext:NSManagedObjectContext {
         get {
@@ -55,6 +55,10 @@ class ComposingCardsViewModel: ObservableObject {
     
     func nextNews() {
         
+    }
+    
+    func remove(at offsets:IndexSet) {
+        self.jobToBeDoneCards.remove(atOffsets: offsets)
     }
     
     private func loadSentences(completion: @escaping ([SentenceViewModel]) -> ()) {

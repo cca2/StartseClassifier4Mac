@@ -70,7 +70,7 @@ class JobToBeDoneCardViewModel: Identifiable {
     init(sentence:SentenceModel, category:SentenceModel.Classification) {
         self.category = category
         self.sentence = sentence
-        self.id = sentence.id
+        self.id = UUID()
     }
     
     init() {

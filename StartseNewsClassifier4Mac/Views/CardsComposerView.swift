@@ -41,10 +41,12 @@ struct CardsComposerView: View {
                         Text(title).font(.body).bold()
                         Text(subtitle).font(.body)
                     }else {
-                        Text(self.news2Compose.news!.title)
-                        Text(self.news2Compose.news!.subtitle)
+                        Text(self.news2Compose.news!.title).font(.headline).frame(minWidth:0, maxWidth: 300).padding([.bottom], 5)
+                        
+                        Text(self.news2Compose.news!.subtitle).font(.subheadline).frame(minWidth:0, maxWidth: 300).foregroundColor(.gray)
                     }
                 }.padding()
+                    .frame(width: 300)
                 Divider()
                 ScrollView {
                     if (self.news2Compose.hasLoadedNews) {
@@ -165,11 +167,10 @@ struct CardsComposerView: View {
                     Spacer()
                     VStack (alignment: .leading){
                         Text("Cartões").font(.title)
-                        List {
-                            ForEach(self.news2Compose.jobToBeDoneCards) {
+                        List {                            ForEach(self.news2Compose.jobToBeDoneCards, id: \.id) {
                                 card in
                                 CardView(card: card, imageName: "segmento-farmacia")
-                            }
+                            }.onDelete(perform: delete)
                         }
                         Spacer()
                     }.frame(minWidth: 0, maxWidth: .infinity)
@@ -185,6 +186,10 @@ struct CardsComposerView: View {
 //                self.sentences = news2Compose.sentences
 //            }
         }
+    }
+    
+    func delete(at offsets: IndexSet) {
+        self.news2Compose.remove(at: offsets)
     }
 }
 
