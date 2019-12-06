@@ -57,8 +57,10 @@ class ComposingCardsViewModel: ObservableObject {
         
     }
     
-    func remove(at offsets:IndexSet) {
+    func removeJobToBeDoneCard(at offsets:IndexSet) {
         self.jobToBeDoneCards.remove(atOffsets: offsets)
+        guard let removeIndex = offsets.first else { return }
+        print(">>> Índice para remover: \(removeIndex)")
     }
     
     private func loadSentences(completion: @escaping ([SentenceViewModel]) -> ()) {

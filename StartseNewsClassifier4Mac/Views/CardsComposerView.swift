@@ -156,7 +156,7 @@ struct CardsComposerView: View {
                         }
                         Spacer()
                     }
-                    .frame(minWidth: 200, idealWidth: 100, maxWidth: 200, alignment: .center)
+                    .frame(width:200, alignment: .center)
 //                    Divider()
 //                    VStack{
 //                        Text("Termos").font(.title)
@@ -179,17 +179,11 @@ struct CardsComposerView: View {
             }.frame(minWidth: 800, maxWidth: .infinity)
         }.onAppear() {
             self.news2Compose.managedObjectContext = self.context
-//            if let news2Compose = self.news2Compose {
-//                self.title = news2Compose.news.title
-//                self.subtitle = news2Compose.news.subtitle
-//                self.text = news2Compose.news.text
-//                self.sentences = news2Compose.sentences
-//            }
         }
     }
     
     func delete(at offsets: IndexSet) {
-        self.news2Compose.remove(at: offsets)
+        self.news2Compose.removeJobToBeDoneCard(at: offsets)
     }
 }
 
