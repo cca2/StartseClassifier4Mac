@@ -167,10 +167,13 @@ struct CardsComposerView: View {
                     Spacer()
                     VStack (alignment: .leading){
                         Text("Cartões").font(.title)
-                        List {                            ForEach(self.news2Compose.jobToBeDoneCards, id: \.id) {
-                                card in
-                                CardView(card: card, imageName: "segmento-farmacia")
-                            }.onDelete(perform: delete)
+                        if self.news2Compose.classificationFilter == .job {
+                            List {
+                                ForEach(self.news2Compose.jobToBeDoneCards, id: \.id) {
+                                    card in
+                                    JobToBeDoneCardView(card: card, imageName: "segmento-farmacia")
+                                }.onDelete(perform: delete)
+                            }
                         }
                         Spacer()
                     }.frame(minWidth: 0, maxWidth: .infinity)
